@@ -21,8 +21,8 @@ def euclidean_distance(point1, point2):
     return distance
 
 # Example usage:
-point_a = (1, 2)
-point_b = (4, 6)
+# point_a = (1, 2)
+# point_b = (4, 6)
 
-distance_result = euclidean_distance(point_a, point_b)
-print("Euclidean Distance:", distance_result)
+# distance_result = euclidean_distance(point_a, point_b)
+# print("Euclidean Distance:", distance_result)

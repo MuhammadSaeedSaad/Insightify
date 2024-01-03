@@ -1,7 +1,4 @@
-from func2 import discriminant_function, discriminant_function_1d
-from dataset import dataset
-import numpy as np
-from bhattacharyya import bhattacharyya_bound, bhattacharyya_bound_1d
+from discriminants import discriminant_function, discriminant_function_1d
 
 def dichotomizer(x, mean1, covariance1, mean2, covariance2, prior_probabilitw1, prior_probabilitw2):
   # g1 for w1 & g2 for w2

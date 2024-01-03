@@ -49,11 +49,11 @@ def bhattacharyya_bound_1d(mu1, var1, mu2, var2):
     return pe_min
 
 # Example usage:
-mean1_1d, var1_1d = 1, 2
-mean2_1d, var2_1d = 3, 4
+# mean1_1d, var1_1d = 1, 2
+# mean2_1d, var2_1d = 3, 4
 
-bound_1d = bhattacharyya_bound_1d(mean1_1d, var1_1d, mean2_1d, var2_1d)
-print(f"Bhattacharyya Bound (1D): {bound_1d}")
+# bound_1d = bhattacharyya_bound_1d(mean1_1d, var1_1d, mean2_1d, var2_1d)
+# print(f"Bhattacharyya Bound (1D): {bound_1d}")
 
 
 # # Example usage:
