@@ -1,8 +1,9 @@
-from dataset import dataset
 import numpy as np
 from bhattacharyya import bhattacharyya_bound, bhattacharyya_bound_1d
 from dichotomizer import dichotomizer, dichotomizer_1d
 from classifier_three_categories import classifier_three_categories
+from mahalanobis_distance import mahalanobis_distances
+from dataset import dataset
 from test_points import test_points
 
 # Q2-b 1 dimension
@@ -31,8 +32,8 @@ error_percent = error_count / (len(first_column_w2) * 2)
 
 
 # Q2-c
-# bhattacharyya_bound_1d(mu1, var1, mu2, var2)
-
+error_bound = bhattacharyya_bound_1d(mu1, var1, mu2, var2)
+print(f"Bhattacharyya Bound (2D): {error_bound}")
 
 
 # Q2-d
@@ -55,7 +56,8 @@ for i in range(len(first_column_w2)):
     error_count2 += 1
 error_percent2 = error_count2 / (len(first_column_w2) * 2)
 # print(error_percent2)
-
+error_bound = bhattacharyya_bound(mmu1, ccov1, mmu2, ccov2)
+print(f"Bhattacharyya Bound (2D): {error_bound}")
 
 # Q2-e
 mmmu1 = np.mean(dataset[0], axis=0)
@@ -72,11 +74,13 @@ for i in range(len(first_column_w1)):
 
 for i in range(len(first_column_w2)):
   result = dichotomizer(dataset[1][i], mmmu1, cccov1, mmmu2, cccov2, pw1, pw2)
-  print(result)
+  # print(result)
   if result != "w2":
     error_count2 += 1
 error_percent3 = error_count3 / (len(first_column_w2) * 2)
-print(error_percent3)
+# print(error_percent3)
+error_bound = bhattacharyya_bound(mmmu1, cccov1, mmmu2, cccov2)
+print(f"Bhattacharyya Bound (3D): {error_bound}")
 
 # Q2-f
 # DISCUSS ALL PREVIOUS RESULTS. 
@@ -84,13 +88,28 @@ print(error_percent3)
 # and the error increase from 0.35 when using 1 dimension to 0.4 when using 2.
 
 # Q5-a
+mmmu3 = mmmu2 = np.mean(dataset[2], axis=0)
+cccov3 = np.cov(dataset[2], rowvar=False, bias=True)
+mus = [mmmu1, mmmu2, mmmu3]
+covs = [cccov1, cccov2, cccov3]
+all_distsances = []
+for i in range(len(test_points)):
+  # this is the distance form one point to each category mean
+  mah_distances = mahalanobis_distances(test_points[i], mus, covs)
+  all_distsances.append(mah_distances)
+# print(all_distsances)
 
-# mean_vector1 = np.mean(dataset[0], axis=0)
-# mean_vector2 = np.mean(dataset[1], axis=0)
-# mean_vector3 = np.mean(dataset[2], axis=0)
-# print(mean_vector1)
+# Q5-b
+classifications = []
+pwi = 1/3
+priories = [pwi for _ in range(3)]
+for i in range(len(test_points)):
+  classifications.append(classifier_three_categories(test_points[i], mus, covs, priories))
+# print(classifications)
 
-# cov_matrix1 = np.cov(dataset[0], rowvar=False, bias=True)
-# cov_matrix2 = np.cov(dataset[1], rowvar=False, bias=True)
-# cov_matrix3 = np.cov(dataset[2], rowvar=False, bias=True)
-# print(cov_matrix1)
+# Q5-c
+classifications = []
+priories = [0.8, 0.1, 0.1]
+for i in range(len(test_points)):
+  classifications.append(classifier_three_categories(test_points[i], mus, covs, priories))
+# print(classifications)

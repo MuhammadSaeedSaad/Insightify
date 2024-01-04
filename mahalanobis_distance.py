@@ -22,6 +22,12 @@ def mahalanobis_distance(x, mean, covariance):
 
     return mahalanobis_distance
 
+def mahalanobis_distances(x, mus, covs):
+    distances = []
+    for i in range(len(mus)):
+        distances.append(mahalanobis_distance(x, mus[i], covs[i]))
+    return distances
+
 # Example usage:
 # mean_vector = np.array([1, 2])
 # covariance_matrix = np.array([[3, 0.5], [0.5, 1]])
