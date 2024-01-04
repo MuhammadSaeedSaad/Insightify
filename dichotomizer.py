@@ -23,15 +23,3 @@ def dichotomizer_1d(x, mean1, covariance1, mean2, covariance2, prior_probabilitw
     return "w1"
   else:
     return "w2"
-
-
-
-# mean_vector1 = np.mean(dataset[0], axis=0)
-# mean_vector2 = np.mean(dataset[1], axis=0)
-# mean_vector3 = np.mean(dataset[2], axis=0)
-# print(mean_vector1)
-
-# cov_matrix1 = np.cov(dataset[0], rowvar=False, bias=True)
-# cov_matrix2 = np.cov(dataset[1], rowvar=False, bias=True)
-# cov_matrix3 = np.cov(dataset[2], rowvar=False, bias=True)
-# print(cov_matrix1)
